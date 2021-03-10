@@ -65,12 +65,12 @@ public class ScaleAnimationCreator extends BaseAnimationCreator implements ICrea
         return this;
     }
 
-    public ScaleAnimationCreator setPivotXType(Integer pivotXType) {
+    public ScaleAnimationCreator setPivotXType(@AnimationType Integer pivotXType) {
         this.pivotXType = pivotXType;
         return this;
     }
 
-    public ScaleAnimationCreator setPivotYType(Integer pivotYType) {
+    public ScaleAnimationCreator setPivotYType(@AnimationType Integer pivotYType) {
         this.pivotYType = pivotYType;
         return this;
     }
