@@ -44,7 +44,7 @@ public class TranslateAnimationCreator extends BaseAnimationCreator
 
     //<editor-fold desc="Setter">
 
-    public TranslateAnimationCreator setFromXType(Integer fromXType) {
+    public TranslateAnimationCreator setFromXType(@AnimationType Integer fromXType) {
         this.fromXType = fromXType;
         return this;
     }
@@ -54,7 +54,7 @@ public class TranslateAnimationCreator extends BaseAnimationCreator
         return this;
     }
 
-    public TranslateAnimationCreator setToXType(Integer toXType) {
+    public TranslateAnimationCreator setToXType(@AnimationType Integer toXType) {
         this.toXType = toXType;
         return this;
     }
@@ -64,7 +64,7 @@ public class TranslateAnimationCreator extends BaseAnimationCreator
         return this;
     }
 
-    public TranslateAnimationCreator setFromYType(Integer fromYType) {
+    public TranslateAnimationCreator setFromYType(@AnimationType Integer fromYType) {
         this.fromYType = fromYType;
         return this;
     }
@@ -74,7 +74,7 @@ public class TranslateAnimationCreator extends BaseAnimationCreator
         return this;
     }
 
-    public TranslateAnimationCreator setToYType(Integer toYType) {
+    public TranslateAnimationCreator setToYType(@AnimationType Integer toYType) {
         this.toYType = toYType;
         return this;
     }

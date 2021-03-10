@@ -51,12 +51,12 @@ public class RotateAnimationCreator extends BaseAnimationCreator implements ICre
         return this;
     }
 
-    public RotateAnimationCreator setPivotXType(Integer pivotXType) {
+    public RotateAnimationCreator setPivotXType(@AnimationType Integer pivotXType) {
         this.pivotXType = pivotXType;
         return this;
     }
 
-    public RotateAnimationCreator setPivotYType(Integer pivotYType) {
+    public RotateAnimationCreator setPivotYType(@AnimationType Integer pivotYType) {
         this.pivotYType = pivotYType;
         return this;
     }
