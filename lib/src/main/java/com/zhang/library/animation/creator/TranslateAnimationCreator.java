@@ -9,8 +9,7 @@ import com.zhang.library.animation.constant.AnimationType;
  *
  * @author ZhangXiaoMing 2021-03-09 17:39 星期二
  */
-public class TranslateAnimationCreator extends BaseAnimationCreator
-        implements ICreator<TranslateAnimation> {
+public class TranslateAnimationCreator extends BaseAnimationCreator<TranslateAnimation> {
 
     /** 设置X起始类型 */
     private Integer fromXType;
