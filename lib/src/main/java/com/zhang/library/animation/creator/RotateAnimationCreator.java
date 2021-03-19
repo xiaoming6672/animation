@@ -9,7 +9,7 @@ import com.zhang.library.animation.constant.AnimationType;
  *
  * @author ZhangXiaoMing 2021-03-09 22:11 星期二
  */
-public class RotateAnimationCreator extends BaseAnimationCreator implements ICreator<RotateAnimation> {
+public class RotateAnimationCreator extends BaseAnimationCreator<RotateAnimation> {
 
     /** 起始度数 */
     private float fromDegrees;

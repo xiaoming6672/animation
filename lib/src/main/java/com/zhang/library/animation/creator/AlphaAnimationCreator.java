@@ -7,7 +7,7 @@ import android.view.animation.AlphaAnimation;
  *
  * @author ZhangXiaoMing 2021-03-09 22:07 星期二
  */
-public class AlphaAnimationCreator extends BaseAnimationCreator implements ICreator<AlphaAnimation> {
+public class AlphaAnimationCreator extends BaseAnimationCreator<AlphaAnimation> {
 
     private float fromAlpha;
     private float toAlpha;

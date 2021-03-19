@@ -10,7 +10,7 @@ import com.zhang.library.animation.constant.AnimationType;
  *
  * @author ZhangXiaoMing 2021-03-09 21:21 星期二
  */
-public class ScaleAnimationCreator extends BaseAnimationCreator implements ICreator<ScaleAnimation> {
+public class ScaleAnimationCreator extends BaseAnimationCreator<ScaleAnimation> {
 
     /** X起始伸缩值 */
     private float fromX;
