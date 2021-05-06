@@ -118,6 +118,18 @@ public abstract class BaseAnimationCreator<T extends Animation> implements ICrea
         if (startOffset != null) {
             anim.setStartOffset(startOffset);
         }
+
+        if (fillAfter != null) {
+            anim.setFillAfter(fillAfter);
+        }
+
+        if (fillBefore != null) {
+            anim.setFillBefore(fillBefore);
+        }
+
+        if (fillEnabled != null) {
+            anim.setFillEnabled(fillEnabled);
+        }
     }
 
 }
