@@ -5,18 +5,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.zhang.library.animation.array.ArrayAnimation;
 import com.zhang.library.animation.constant.AnimationType;
 import com.zhang.library.animation.constant.RepeatMode;
 import com.zhang.library.animation.creator.ScaleAnimationCreator;
 import com.zhang.library.animation.creator.TranslateAnimationCreator;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,6 +29,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        if (v.getTag() != null) {
+            ArrayAnimation arrayAnim = (ArrayAnimation) v.getTag();
+            arrayAnim.stop();
+
+            v.setTag(null);
+            return;
+        }
+
         ScaleAnimation scale = ScaleAnimationCreator.builder(AnimationType.SELF)
                 .setPivotXValue(0.5F)
                 .setPivotYValue(0.5F)
@@ -80,5 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         arrayAnim.start();
+
+        v.setTag(arrayAnim);
     }
 }

@@ -35,6 +35,10 @@ public class ArrayAnimation {
     private int mLoopCount;
     /** 是否正在播放动画 */
     private boolean isAnimating;
+    /** 中断动画播放 */
+    private boolean interrupt;
+    /** 当前正在播放的动画 */
+    private Animation mCurrent;
 
     public ArrayAnimation() {
         this.mShareInterpolator = false;
@@ -106,6 +110,21 @@ public class ArrayAnimation {
         return isAnimating;
     }
 
+    public void stop() {
+        if (!isAnimating())
+            return;
+
+        interrupt = true;
+
+        if (mCurrent != null) {
+            mCurrent.cancel();
+        }
+
+        if (mTarget != null) {
+            mTarget.clearAnimation();
+        }
+    }
+
     public void start() {
         if (mTarget == null || CollectionUtils.isEmpty(mAnimList)) {
             throw new IllegalArgumentException("Please set up the view to play the animation first or add the animation to be played!");
@@ -118,9 +137,22 @@ public class ArrayAnimation {
     }
 
     private void playAnimation(final int index) {
+        if (interrupt) {
+            interrupt = false;
+
+            mIndex = 0;
+            mLoopCount = 0;
+            return;
+        }
+
         final int position = getPosition(index);
 
         Animation anim = CollectionUtils.get(mAnimList, position);
+        if (anim == null)
+            return;
+
+        mCurrent = anim;
+
         processAnimInterpolator(anim);
         anim.setAnimationListener(new AnimationCallback() {
             @Override
