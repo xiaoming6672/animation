@@ -1,16 +1,13 @@
 package com.zhang.library.animation.creator;
 
-import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
-
-import com.zhang.library.animation.constant.AnimationType;
 
 /**
  * 缩放动画创造器
  *
  * @author ZhangXiaoMing 2021-03-09 21:21 星期二
  */
-public class ScaleAnimationCreator extends BaseAnimationCreator<ScaleAnimation> {
+public class ScaleAnimationCreator extends AnimationCreator<ScaleAnimation> {
 
     /** X起始伸缩值 */
     private float fromX;
@@ -37,9 +34,9 @@ public class ScaleAnimationCreator extends BaseAnimationCreator<ScaleAnimation> 
         return new ScaleAnimationCreator();
     }
 
-    public static ScaleAnimationCreator builder(@AnimationType int animationType) {
+    public static ScaleAnimationCreator builder(@PivotType int animationType) {
         ScaleAnimationCreator creator = new ScaleAnimationCreator();
-        creator.setAnimationType(animationType);
+        creator.setPivotType(animationType);
 
         return creator;
     }
@@ -65,31 +62,49 @@ public class ScaleAnimationCreator extends BaseAnimationCreator<ScaleAnimation> 
         return this;
     }
 
-    public ScaleAnimationCreator setPivotXType(@AnimationType Integer pivotXType) {
+    protected ScaleAnimationCreator setPivotXType(@PivotType int pivotXType) {
         this.pivotXType = pivotXType;
         return this;
     }
 
-    public ScaleAnimationCreator setPivotYType(@AnimationType Integer pivotYType) {
+    protected ScaleAnimationCreator setPivotYType(@PivotType int pivotYType) {
         this.pivotYType = pivotYType;
         return this;
     }
 
-    public ScaleAnimationCreator setPivotXValue(Float pivotXValue) {
+    /** 设置旋转中心点为控件相对自身中心 */
+    public ScaleAnimationCreator setPivotSelfCenter() {
+        return setPivotXType(SELF)
+                .setPivotYType(SELF)
+                .setPivotValue(0.5F, 0.5F);
+    }
+
+    /**
+     * 设置旋转中心点
+     *
+     * @param pivotXValue X旋转中心位置
+     * @param pivotYValue Y旋转中心位置
+     */
+    public ScaleAnimationCreator setPivotValue(float pivotXValue, float pivotYValue) {
+        return setPivotXValue(pivotXValue)
+                .setPivotYValue(pivotYValue);
+    }
+
+    protected ScaleAnimationCreator setPivotXValue(float pivotXValue) {
         this.pivotXValue = pivotXValue;
         return this;
     }
 
-    public ScaleAnimationCreator setPivotYValue(Float pivotYValue) {
+    protected ScaleAnimationCreator setPivotYValue(float pivotYValue) {
         this.pivotYValue = pivotYValue;
         return this;
     }
     //</editor-fold>
 
     @Override
-    public void setAnimationType(@AnimationType int animationType) {
-        this.pivotXType = animationType;
-        this.pivotYType = animationType;
+    public void setPivotType(@PivotType int pivotType) {
+        setPivotXType(pivotType);
+        setPivotYType(pivotType);
     }
 
     @Override
