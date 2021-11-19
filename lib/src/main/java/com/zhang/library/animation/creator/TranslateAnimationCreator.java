@@ -2,14 +2,12 @@ package com.zhang.library.animation.creator;
 
 import android.view.animation.TranslateAnimation;
 
-import com.zhang.library.animation.constant.AnimationType;
-
 /**
  * 移动动画创造器
  *
  * @author ZhangXiaoMing 2021-03-09 17:39 星期二
  */
-public class TranslateAnimationCreator extends BaseAnimationCreator<TranslateAnimation> {
+public class TranslateAnimationCreator extends AnimationCreator<TranslateAnimation> {
 
     /** 设置X起始类型 */
     private Integer fromXType;
@@ -35,15 +33,15 @@ public class TranslateAnimationCreator extends BaseAnimationCreator<TranslateAni
         return new TranslateAnimationCreator();
     }
 
-    public static TranslateAnimationCreator builder(@AnimationType int animationType) {
+    public static TranslateAnimationCreator builder(@PivotType int animationType) {
         TranslateAnimationCreator creator = new TranslateAnimationCreator();
-        creator.setAnimationType(animationType);
+        creator.setPivotType(animationType);
         return creator;
     }
 
     //<editor-fold desc="Setter">
 
-    public TranslateAnimationCreator setFromXType(@AnimationType Integer fromXType) {
+    protected TranslateAnimationCreator setFromXType(@PivotType int fromXType) {
         this.fromXType = fromXType;
         return this;
     }
@@ -53,7 +51,7 @@ public class TranslateAnimationCreator extends BaseAnimationCreator<TranslateAni
         return this;
     }
 
-    public TranslateAnimationCreator setToXType(@AnimationType Integer toXType) {
+    protected TranslateAnimationCreator setToXType(@PivotType int toXType) {
         this.toXType = toXType;
         return this;
     }
@@ -63,7 +61,7 @@ public class TranslateAnimationCreator extends BaseAnimationCreator<TranslateAni
         return this;
     }
 
-    public TranslateAnimationCreator setFromYType(@AnimationType Integer fromYType) {
+    protected TranslateAnimationCreator setFromYType(@PivotType int fromYType) {
         this.fromYType = fromYType;
         return this;
     }
@@ -73,7 +71,7 @@ public class TranslateAnimationCreator extends BaseAnimationCreator<TranslateAni
         return this;
     }
 
-    public TranslateAnimationCreator setToYType(@AnimationType Integer toYType) {
+    protected TranslateAnimationCreator setToYType(@PivotType int toYType) {
         this.toYType = toYType;
         return this;
     }
@@ -86,12 +84,12 @@ public class TranslateAnimationCreator extends BaseAnimationCreator<TranslateAni
     //</editor-fold>
 
     @Override
-    public void setAnimationType(@AnimationType int animationType) {
-        this.fromXType
-                = this.toXType
-                = this.fromYType
-                = this.toYType
-                = animationType;
+    public void setPivotType(@PivotType int pivotType) {
+        setFromXType(pivotType);
+        setToXType(pivotType);
+
+        setFromYType(pivotType);
+        setToYType(pivotType);
     }
 
     @Override

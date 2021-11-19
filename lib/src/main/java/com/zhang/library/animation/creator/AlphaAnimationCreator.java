@@ -7,7 +7,7 @@ import android.view.animation.AlphaAnimation;
  *
  * @author ZhangXiaoMing 2021-03-09 22:07 星期二
  */
-public class AlphaAnimationCreator extends BaseAnimationCreator<AlphaAnimation> {
+public class AlphaAnimationCreator extends AnimationCreator<AlphaAnimation> {
 
     private float fromAlpha;
     private float toAlpha;
@@ -32,7 +32,7 @@ public class AlphaAnimationCreator extends BaseAnimationCreator<AlphaAnimation> 
     //</editor-fold>
 
     @Override
-    public void setAnimationType(int animationType) {
+    public void setPivotType(int pivotType) {
     }
 
     @Override

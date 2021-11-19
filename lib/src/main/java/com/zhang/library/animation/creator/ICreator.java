@@ -2,7 +2,6 @@ package com.zhang.library.animation.creator;
 
 import android.view.animation.Animation;
 
-import com.zhang.library.animation.constant.AnimationType;
 
 /**
  * 创建动画对象接口
@@ -12,7 +11,7 @@ import com.zhang.library.animation.constant.AnimationType;
 public interface ICreator<T extends Animation> {
 
     /** 统一设置动画的X、Y的类型 */
-    void setAnimationType(@AnimationType int animationType);
+    void setPivotType(@AnimationCreator.PivotType int pivotType);
 
     /** 创建动画对象 */
     T create();

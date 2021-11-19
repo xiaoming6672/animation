@@ -3,15 +3,15 @@ package com.zhang.library.animation;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 
 import com.zhang.library.animation.array.ArrayAnimation;
-import com.zhang.library.animation.constant.AnimationType;
-import com.zhang.library.animation.constant.RepeatMode;
+import com.zhang.library.animation.creator.AnimationCreator;
+import com.zhang.library.animation.creator.RotateAnimationCreator;
 import com.zhang.library.animation.creator.ScaleAnimationCreator;
 import com.zhang.library.animation.creator.TranslateAnimationCreator;
 
@@ -25,6 +25,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        findViewById(R.id.tv_text).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                RotateAnimation rotate = RotateAnimationCreator.builder(AnimationCreator.SELF)
+                        .setPivotSelfCenter()
+                        .setFromDegrees(-10)
+                        .setToDegrees(10)
+                        .setDuration(500)
+                        .setAnimRepeat(3, AnimationCreator.REVERSE)
+//                        .setInterpolator(new AccelerateInterpolator())
+                        .create();
+
+                ArrayAnimation arrayAnimation = new ArrayAnimation()
+                        .setTarget(v)
+                        .setRepeatCount(Animation.INFINITE)
+                        .addAnimation(rotate)
+                        ;
+
+                v.clearAnimation();
+                arrayAnimation.start();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -37,28 +61,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        ScaleAnimation scale = ScaleAnimationCreator.builder(AnimationType.SELF)
-                .setPivotXValue(0.5F)
-                .setPivotYValue(0.5F)
+        ScaleAnimation scale = ScaleAnimationCreator.builder(AnimationCreator.SELF)
+                .setPivotSelfCenter()
                 .setFromX(1F)
                 .setToX(2F)
                 .setFromY(1F)
                 .setToY(2F)
                 .setDuration(1000L)
-                .setRepeatCount(1)
-                .setRepeatMode(RepeatMode.REVERSE)
-                .setInterpolator(new LinearInterpolator())
+                .setAnimRepeat(1, AnimationCreator.REVERSE)
                 .create();
 
-        TranslateAnimation translate = TranslateAnimationCreator.builder(AnimationType.SELF)
+        TranslateAnimation translate = TranslateAnimationCreator.builder(AnimationCreator.SELF)
                 .setFromXValue(0F)
                 .setToXValue(1F)
                 .setFromYValue(0F)
                 .setToYValue(5F)
                 .setDuration(1500L)
-                .setRepeatCount(Animation.INFINITE)
-                .setRepeatMode(RepeatMode.REVERSE)
-                .setInterpolator(new AccelerateInterpolator())
+                .setAnimRepeat(Animation.INFINITE, AnimationCreator.REVERSE)
                 .create();
 
         ArrayAnimation arrayAnim = new ArrayAnimation()
@@ -86,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e(TAG, "onAnimEnd()");
             }
         });
+
+        v.clearAnimation();
         arrayAnim.start();
 
         v.setTag(arrayAnim);

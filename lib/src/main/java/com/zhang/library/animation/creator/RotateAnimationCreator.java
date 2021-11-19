@@ -2,14 +2,12 @@ package com.zhang.library.animation.creator;
 
 import android.view.animation.RotateAnimation;
 
-import com.zhang.library.animation.constant.AnimationType;
-
 /**
  * 旋转动画创造器
  *
  * @author ZhangXiaoMing 2021-03-09 22:11 星期二
  */
-public class RotateAnimationCreator extends BaseAnimationCreator<RotateAnimation> {
+public class RotateAnimationCreator extends AnimationCreator<RotateAnimation> {
 
     /** 起始度数 */
     private float fromDegrees;
@@ -33,9 +31,9 @@ public class RotateAnimationCreator extends BaseAnimationCreator<RotateAnimation
         return new RotateAnimationCreator();
     }
 
-    public static RotateAnimationCreator builder(@AnimationType int animationType) {
+    public static RotateAnimationCreator builder(@PivotType int animationType) {
         RotateAnimationCreator creator = new RotateAnimationCreator();
-        creator.setAnimationType(animationType);
+        creator.setPivotType(animationType);
 
         return creator;
     }
@@ -51,31 +49,49 @@ public class RotateAnimationCreator extends BaseAnimationCreator<RotateAnimation
         return this;
     }
 
-    public RotateAnimationCreator setPivotXType(@AnimationType Integer pivotXType) {
+    protected RotateAnimationCreator setPivotXType(@PivotType int pivotXType) {
         this.pivotXType = pivotXType;
         return this;
     }
 
-    public RotateAnimationCreator setPivotYType(@AnimationType Integer pivotYType) {
+    protected RotateAnimationCreator setPivotYType(@PivotType int pivotYType) {
         this.pivotYType = pivotYType;
         return this;
     }
 
-    public RotateAnimationCreator setPivotXValue(Float pivotXValue) {
+    /** 设置旋转中心点为控件相对自身中心 */
+    public RotateAnimationCreator setPivotSelfCenter() {
+        return setPivotXType(SELF)
+                .setPivotYType(SELF)
+                .setPivotValue(0.5F, 0.5F);
+    }
+
+    /**
+     * 设置旋转中心点
+     *
+     * @param pivotXValue X旋转中心位置
+     * @param pivotYValue Y旋转中心位置
+     */
+    public RotateAnimationCreator setPivotValue(float pivotXValue, float pivotYValue) {
+        return setPivotXValue(pivotXValue)
+                .setPivotYValue(pivotYValue);
+    }
+
+    protected RotateAnimationCreator setPivotXValue(float pivotXValue) {
         this.pivotXValue = pivotXValue;
         return this;
     }
 
-    public RotateAnimationCreator setPivotYValue(Float pivotYValue) {
+    protected RotateAnimationCreator setPivotYValue(float pivotYValue) {
         this.pivotYValue = pivotYValue;
         return this;
     }
     //</editor-fold>
 
     @Override
-    public void setAnimationType(@AnimationType int animationType) {
-        this.pivotXType = animationType;
-        this.pivotYType = animationType;
+    public void setPivotType(@PivotType int pivotType) {
+        setPivotXType(pivotType);
+        setPivotYType(pivotType);
     }
 
     @Override
